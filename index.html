@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HausaGenius AI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b1020;
+            color: white;
+        }
+
+        header {
+            padding: 22px 18px;
+            background: #151c32;
+            border-bottom: 1px solid #293451;
+        }
+
+        header h2 {
+            margin: 0;
+            color: #a78bfa;
+        }
+
+        header p {
+            margin-bottom: 0;
+            color: #cbd5e1;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 22px 16px;
+        }
+
+        .hero {
+            padding: 25px 20px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #5424a8, #1d4ed8);
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: 29px;
+            margin-top: 0;
+        }
+
+        .hero p {
+            line-height: 1.6;
+        }
+
+        .badge {
+            background: #ffffff25;
+            padding: 7px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 12px;
+        }
+
+        .card {
+            background: #151c32;
+            border: 1px solid #293451;
+            border-radius: 15px;
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 8px;
+            color: #e2e8f0;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #394765;
+            border-radius: 10px;
+            background: #0b1020;
+            color: white;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #8b5cf6;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 16px;
+            cursor: pointer;
+        }
+
+        button:active {
+            opacity: 0.8;
+        }
+
+        #result {
+            white-space: pre-wrap;
+            line-height: 1.7;
+            color: #e2e8f0;
+            overflow-wrap: anywhere;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>🎨 HausaGenius AI</h2>
+    <p>Your Hausa and English content assistant</p>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <span class="badge">✨ YOUR CREATIVE ASSISTANT</span>
+        <h1>Turn Your Ideas Into Content</h1>
+        <p>Create song lyrics, video scripts, and business advertisements in Hausa or English.</p>
+    </section>
+
+    <section class="card">
+        <h3>🎵 AI Songwriter</h3>
+        <p>Prepare a song idea and generate a sample draft.</p>
+
+        <label for="language">Choose language</label>
+        <select id="language">
+            <option value="Hausa">Hausa</option>
+            <option value="English">English</option>
+        </select>
+
+        <label for="songType">Song type</label>
+        <select id="songType">
+            <option value="Love song">Love song</option>
+            <option value="Wedding song">Wedding song</option>
+            <option value="Praise song">Praise song</option>
+            <option value="Hype song">Hype song</option>
+            <option value="Islamic song">Islamic song</option>
+        </select>
+
+        <label for="idea">Describe your song</label>
+        <textarea id="idea" placeholder="Example: A wedding song for Musa and Aisha"></textarea>
+
+        <button onclick="generateSong()">Create Song Draft</button>
+    </section>
+
+    <section class="card">
+        <h3>🎬 Video Script Writer</h3>
+        <label for="videoIdea">What is your video about?</label>
+        <textarea id="videoIdea" placeholder="Example: An African folktale about honesty"></textarea>
+        <button onclick="generateVideo()">Create Video Draft</button>
+    </section>
+
+    <section class="card">
+        <h3>💼 Business Advertisement</h3>
+        <label for="businessIdea">Describe your business</label>
+        <textarea id="businessIdea" placeholder="Example: A shop selling motorcycle spare parts"></textarea>
+        <button onclick="generateAd()">Create Advertisement Draft</button>
+    </section>
+
+    <section class="card">
+        <h3>📝 Your Draft</h3>
+        <div id="result">Your generated draft will appear here.</div>
+        <button onclick="copyResult()">Copy Draft</button>
+    </section>
+
+</main>
+
+<footer>
+    HausaGenius AI © 2026<br>
+    Built for creative minds.
+</footer>
+
+<script>
+    function showResult(title, text) {
+        document.getElementById("result").textContent =
+            title + "\n\n" + text;
+    }
+
+    function generateSong() {
+        const language = document.getElementById("language").value;
+        const type = document.getElementById("songType").value;
+        const idea = document.getElementById("idea").value.trim();
+
+        if (!idea) {
+            alert("Please describe your song first.");
+            return;
+        }
+
+        showResult("SONG DRAFT", 
+            "Language: " + language +
+            "\nType: " + type +
+            "\nTopic: " + idea +
+            "\n\nINTRO\nWelcome everyone, let the music begin!\n\nVERSE 1\nWrite your opening verse about " + idea +
+            ".\n\nCHORUS\nLet your message shine, let the whole world know!\n\nVERSE 2\nAdd more details, feelings, and memorable lines about " + idea +
+            ".\n\nOUTRO\nEnd the song with a memorable final line.\n\nNote: This is a template, not an AI-generated complete song."
+        );
+    }
+
+    function generateVideo() {
+        const idea = document.getElementById("videoIdea").value.trim();
+
+        if (!idea) {
+            alert("Please describe your video first.");
+            return;
+        }
+
+        showResult("VIDEO SCRIPT DRAFT",
+            "Topic: " + idea +
+            "\n\nSCENE 1 — INTRODUCTION\nIntroduce the main topic and capture the audience's attention.\n\nSCENE 2 — MAIN STORY\nExplain the important events related to " + idea +
+            ".\n\nSCENE 3 — CONCLUSION\nEnd with a memorable lesson or message.\n\nNote: This is a template, not an AI-generated script."
+        );
+    }
+
+    function generateAd() {
+        const idea = document.getElementById("businessIdea").value.trim();
+
+        if (!idea) {
+            alert("Please describe your business first.");
+            return;
+        }
+
+        showResult("ADVERTISEMENT DRAFT",
+            "BUSINESS: " + idea +
+            "\n\nLooking for quality and reliable service?\n\nVisit " + idea +
+            " today!\n\nWe welcome new and returning customers. Contact us to learn more about our products and services.\n\nThank you for supporting our business!"
+        );
+    }
+
+    function copyResult() {
+        const text = document.getElementById("result").innerText;
+
+        if (!text || text === "Your generated draft will appear here.") {
+            alert("Create a draft first.");
+            return;
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text)
+                .then(() => alert("Draft copied!"))
+                .catch(() => fallbackCopy(text));
+        } else {
+            fallbackCopy(text);
+        }
+    }
+
+    function fallbackCopy(text) {
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.style.position = "fixed";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+
+        try {
+            document.execCommand("copy");
+            alert("Draft copied!");
+        } catch (error) {
+            alert("Copy failed. Please select and copy the text manually.");
+        }
+
+        area.remove();
+    }
+</script>
+
+</body>
+</html>
